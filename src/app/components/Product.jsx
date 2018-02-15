@@ -1,45 +1,51 @@
-import React, { Component } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
-export class Product extends Component {
-	render() {
+const Product = ({ data }) => {
+  const src = ('0' in data.advertisementAssets) ?
+    data.advertisementAssets['0'].advertisementThumbnails.inventory_m.url :
+    data.advertisementAssets.advertisementThumbnails.inventory_m.url;
 
-		let src;
-		src = this.props.data.advertisementAssets.hasOwnProperty('0')
-		? this.props.data.advertisementAssets['0'].advertisementThumbnails.inventory_m.url
-		: this.props.data.advertisementAssets.advertisementThumbnails.inventory_m.url;
+  return (
+    <div className="product">
+      <div className="product__head">
+        <div className="product__head__purpose">{data.purpose === 0 ? 'Mieten' : 'Kaufen'}</div>
+        <div className="image-wrapper">
+          <img src={src} alt="property thumbnail" />
+        </div>
+      </div>
+      <div className="product__body">
+        <div className="product__body__title">{data.title}</div>
+        <div className="product__body__address">
+          {(`${data.realestateSummary.address
+            .postalCode} ${data.realestateSummary.address
+            .city} /  ${data.realestateSummary.address.street}`)}
+        </div>
+        <div className="product__body__price">
+          {data.purpose === 0
+            ? data.advertisementPrice.baseRent
+            : data.advertisementPrice.sellPrice} €
+        </div>
+        <div className="product__body__size">
+          <span className="product__body__size__rooms">
+            {data.realestateSummary.numberOfRooms} Zimmer
+          </span>
+          <span className="product__body__size__space">
+            ab {Math.round(data.realestateSummary.space)} m<sup>2</sup>
+          </span>
+        </div>
+      </div>
+    </div>
+  );
+};
 
-		return (
-			<div className="product">
-				<div className="product__head">
-					<div className="product__head__purpose">{this.props.data.purpose == 0 ? 'Mieten' : 'Kaufen'}</div>
-					<div className="image-wrapper">
-						<img src={src} />
-					</div>
-				</div>
-				<div className="product__body">
-					<div className="product__body__title">{this.props.data.title}</div>
-					<div className="product__body__address">
-						{this.props.data.realestateSummary.address.postalCode + ' '
-						+ this.props.data.realestateSummary.address.city
-						+ ' / ' + this.props.data.realestateSummary.address.street}
-					</div>
-					<div className="product__body__price">
-						{this.props.data.purpose == 0
-							? this.props.data.advertisementPrice.baseRent
-							: this.props.data.advertisementPrice.sellPrice} €
-					</div>
-					<div className="product__body__size">
-						<span className="product__body__size__rooms">
-							{this.props.data.realestateSummary.numberOfRooms} Zimmer
-						</span>
-						<span className="product__body__size__space">
-							ab {Math.round(this.props.data.realestateSummary.space)} m<sup>2</sup>
-						</span>
-					</div>
-				</div>
-			</div>
-		);
-	}
-}
+Product.propTypes = {
+  data: PropTypes.shape({
+    title: PropTypes.string,
+    purpose: PropTypes.number,
+  }),
+};
+
+Product.defaultProps = { data: {} };
 
 export default Product;

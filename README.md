@@ -26,3 +26,4 @@ Used React.JS as it enables
 * All images scaled to fit a 8:5 aspect ratio without letterboxes.
 * Loader animation when fetching data.
 * Folder structure for React components map to corresponding stylesheets.
+* ESLint used throughout.
