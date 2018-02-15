@@ -1,0 +1,80 @@
+.product {
+    &__head {
+        position: relative;
+        width: 100%;
+        padding-bottom: 62.5%;
+
+        &__purpose {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 14px;
+            font-weight: bold;
+            padding: 8px;
+            background-color: white;
+            color: grey;
+            border-radius: 2px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2), 0 -1px 0px rgba(0,0,0,0.02);
+            z-index: 1;
+        }
+
+        .image-wrapper {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: #ccc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+
+            img {
+                flex-shrink: 0;
+                min-width: 100%;
+                min-height: 100%;
+            }
+        }
+    }
+
+    &__body {
+        border: 1px solid #ccc;
+        border-top: 0;
+        padding: 40px;
+
+        &__title {
+            font-size: 16px;
+            line-height: 1.5em;
+            height: 3em;
+            overflow: hidden;
+        }
+
+        &__address {
+            font-size: 13px;
+            font-weight: bold;
+            margin: 20px 0;
+            color: #aaa;
+        }
+
+        &__price {
+            display: inline-block;
+            width: 32%;
+            font-weight: bold;
+        }
+
+        &__size {
+            display: inline-block;
+            width: 64%;
+            text-align: right;
+            color: #666;
+            line-height: 3;
+
+            &__rooms {
+                border-right: 1px solid #ccc;
+                padding: 8px 16px;
+                margin-right: 16px;
+            }
+        }
+    }
+}
